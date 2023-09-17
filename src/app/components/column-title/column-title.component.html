@@ -1,0 +1,20 @@
+<div class="title-wrapper">
+    <h5 *ngIf="!titleEdit" class="title" (click)="onClick()">
+        {{title}}
+    </h5>
+    <div *ngIf="titleEdit">
+        <input
+            autofocus
+            (blur)="onBlur()"
+            class="title-edit"
+            autoSizeInput
+            [includeBorders]=true
+            [value]="title"
+            [(ngModel)]="title"
+            name="title"
+        >
+    </div>
+    <div class="counter">
+        <p>36</p>
+    </div>
+</div>
