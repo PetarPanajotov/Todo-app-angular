@@ -4,11 +4,11 @@ import { TodoService } from 'src/app/services/todo-service.service';
 import { Category } from 'src/app/types/columnList';
 
 @Component({
-  selector: 'app-column-container',
-  templateUrl: './column-container.component.html',
-  styleUrls: ['./column-container.component.sass'],
+  selector: 'app-container',
+  templateUrl: './container.component.html',
+  styleUrls: ['./container.component.sass'],
 })
-export class ColumnContainerComponent implements OnInit{
+export class ContainerComponent implements OnInit{
   columnData: Category[] = [];
   
   constructor(private toDoService: TodoService) {}

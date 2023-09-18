@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ColumnContainerComponent } from './column-container.component';
+import { ContainerComponent } from './container.component';
 
 describe('ColumnContainerComponent', () => {
-  let component: ColumnContainerComponent;
-  let fixture: ComponentFixture<ColumnContainerComponent>;
+  let component: ContainerComponent;
+  let fixture: ComponentFixture<ContainerComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ColumnContainerComponent]
+      declarations: [ContainerComponent]
     });
-    fixture = TestBed.createComponent(ColumnContainerComponent);
+    fixture = TestBed.createComponent(ContainerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

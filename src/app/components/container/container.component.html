@@ -1,0 +1,8 @@
+<main class="container-fluid">
+    <div class="wrapper">
+        <div class="column-wrapper" *ngFor="let data of columnData">
+            <app-column-title [title]="data.title" (editedTitle)="handleEdit($event)" />
+            <app-task-card [data]="data" />
+        </div>
+    </div>
+</main>
