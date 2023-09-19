@@ -13,6 +13,10 @@ import { FormsModule } from "@angular/forms";
 import { AutofocusDirective } from './directives/autofocus.directive';
 import { TaskCardComponent } from './components/task-card/task-card.component';
 import { CardBtnComponent } from './components/card-btn/card-btn.component';
+import { AddNewTaskComponent } from './components/add-new-task/add-new-task.component';
+import { CreateEditModalComponent } from './components/create-edit-modal/create-edit-modal.component';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +25,9 @@ import { CardBtnComponent } from './components/card-btn/card-btn.component';
     ColumnTitleComponent,
     AutofocusDirective,
     TaskCardComponent,
-    CardBtnComponent
+    CardBtnComponent,
+    AddNewTaskComponent,
+    CreateEditModalComponent
   ],
   imports: [
     BrowserModule,
@@ -31,6 +37,7 @@ import { CardBtnComponent } from './components/card-btn/card-btn.component';
     FormsModule,
     BsDropdownModule.forRoot(),
     ModalModule.forRoot(),
+    BsDatepickerModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
