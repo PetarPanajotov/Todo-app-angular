@@ -20,6 +20,7 @@
     "@angular/router": "^16.1.0",
     "@types/uuid": "^9.0.4",
     "bootstrap": "^5.2.3",
+    "moment": "^2.29.4",
     "ngx-autosize-input": "^16.0.0",
     "ngx-bootstrap": "^11.0.2",
     "ngx-drag-drop": "^16.1.0",
