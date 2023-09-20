@@ -5,10 +5,12 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
   providedIn: 'root'
 })
 export class ModalService {
-  modalRef?: BsModalRef
+  modalRef?: BsModalRef;
+  columnId: string | undefined;
   constructor(private modalService: BsModalService) {}
 
-  openModal(template: TemplateRef<any>) {
+  openModal(template: TemplateRef<any>, columnId: string) {
+    this.columnId = columnId;
     this.modalRef = this.modalService.show(template);
   };
 
