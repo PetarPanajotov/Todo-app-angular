@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { ModalService } from 'src/app/services/modal.service';
 import { TodoService } from 'src/app/services/todo-service.service';
 import { Category, TaskDraggable, Task } from 'src/app/types/task-management.models';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-create-edit-modal',
@@ -15,8 +16,8 @@ export class CreateEditModalComponent implements OnInit, OnDestroy {
   isEdit: boolean = false;
   columnId = this.modalService.columnId;
   columnData!: Category[];
-  tags?: string[] = [];
-  tag: string = ''; 
+  tags: string[] = [];
+  tag: string = '';
   subscription: Subscription | undefined;
   taskCardForm!: FormGroup;
 
@@ -27,7 +28,9 @@ export class CreateEditModalComponent implements OnInit, OnDestroy {
       description: this.isEdit ? new FormControl(this.dataToEdit?.description) : new FormControl(''),
       dueTo: this.isEdit ? new FormControl(this.dataToEdit?.name) : new FormControl(''),
     });
-    this.tags = this.isEdit? this.dataToEdit?.tags: [];
+    if (this.isEdit) {
+      this.tags = this.dataToEdit?.tags!
+    }
     this.todoService.columnData.subscribe((data: any) => {
       this.columnData = data
     })
@@ -44,6 +47,7 @@ export class CreateEditModalComponent implements OnInit, OnDestroy {
     const { name, description, dueTo } = this.taskCardForm.value;
     if (name && description && dueTo) {
       const contentItem: Task = {
+        id: uuidv4(),
         name: name,
         createdOn: new Date().toString(),
         description: description,
@@ -53,13 +57,33 @@ export class CreateEditModalComponent implements OnInit, OnDestroy {
       const formData: TaskDraggable = {
         content: contentItem
       };
-      if(this.isEdit) {
-        
-      }
       column?.draggableItem.push(formData);
       this.modalService.modalRef?.hide();
     };
   };
+
+  onEdit(): void {
+    const foundItem = this.columnData.find(column =>
+      column.draggableItem.some(item => item.content.id === this.dataToEdit?.id)
+    );
+
+    if (foundItem) {
+      const itemIndex = foundItem.draggableItem.findIndex(item => item.content.id === this.dataToEdit?.id);
+      if (itemIndex !== -1) {
+        const { name, description, dueTo } = this.taskCardForm.value;
+        const contentItem: Task = {
+          id: this.dataToEdit?.id,
+          name: name,
+          createdOn: new Date().toString(),
+          description: description,
+          dueTo: dueTo,
+          tags: this.tags
+        };
+        foundItem.draggableItem[itemIndex].content = contentItem;
+      };
+    }
+    this.modalService.modalRef?.hide();
+  }
 
   ngOnDestroy(): void {
     if (this.subscription) {

@@ -6,7 +6,7 @@
             <span aria-hidden="true" class="visually-hidden">&times;</span>
         </button>
     </div>
-    <form [formGroup]="taskCardForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="taskCardForm" (ngSubmit)="isEdit? onEdit(): onSubmit()">
         <div class="modal-body">
             <div class="form-group">
                 <div>
