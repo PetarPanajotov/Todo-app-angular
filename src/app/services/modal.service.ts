@@ -9,7 +9,7 @@ export class ModalService {
   columnId: string | undefined;
   constructor(private modalService: BsModalService) {}
 
-  openModal(template: TemplateRef<any>, columnId: string) {
+  openModal(template: TemplateRef<any>, columnId?: string) {
     this.columnId = columnId;
     this.modalRef = this.modalService.show(template);
   };
