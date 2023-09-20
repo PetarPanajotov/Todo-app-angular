@@ -9,7 +9,7 @@ import { ContainerComponent } from './components/container/container.component'
 import {DndModule} from 'ngx-drag-drop';
 import { ColumnTitleComponent } from './components/column-title/column-title.component';
 import { AutoSizeInputModule } from 'ngx-autosize-input';
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { AutofocusDirective } from './directives/autofocus.directive';
 import { TaskCardComponent } from './components/task-card/task-card.component';
 import { CardBtnComponent } from './components/card-btn/card-btn.component';
@@ -35,6 +35,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
     DndModule,
     AutoSizeInputModule,
     FormsModule,
+    ReactiveFormsModule,
     BsDropdownModule.forRoot(),
     ModalModule.forRoot(),
     BsDatepickerModule.forRoot()
