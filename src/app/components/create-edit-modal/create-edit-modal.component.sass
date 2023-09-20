@@ -1,2 +1,29 @@
 .modal-container
-    height: calc( 100vh - 600px )
+    min-height: calc( 100vh - 600px )
+    .inputs-wrapper-flex
+        display: flex
+        gap: 1em
+    .card-tag
+        background-color: rgb(238,130,238)
+        border-radius: 1em
+        padding: 0.3em
+        color: purple
+    .card-tag-wrapper
+        padding-top: 1em
+        display: flex
+        flex-wrap: wrap
+        gap: 0.6em
+    .input-with-suffix
+        position: relative
+        input
+            overflow: hidden
+        button
+            position: absolute
+            top: 0
+            right: 0
+            height: 100%
+            border: none
+            svg
+                display: block
+                height: 100%
+                fill: white
