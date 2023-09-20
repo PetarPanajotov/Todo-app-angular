@@ -8,9 +8,16 @@ import { Category } from 'src/app/types/task-management.models';
   styleUrls: ['./task-card.component.sass']
 })
 export class TaskCardComponent {
-  @Input() data: Category | undefined;
+  @Input() data!: Category
 
   constructor(public toDoService:TodoService) {}
+
+  handleOperation(event: any):void {
+    if(event.method === 'delete') {
+      const filtered = this.data?.draggableItem.filter(item => item.content.id !== event.content.id)
+      this.data.draggableItem = filtered;
+    }
+  }
 
   onDragged = this.toDoService.onDragged
   onDrop = this.toDoService.onDrop
