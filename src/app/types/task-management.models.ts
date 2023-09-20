@@ -1,21 +1,19 @@
 import type { EffectAllowed } from "ngx-drag-drop"
-
-interface contentItem {
+//fix this interface once you fix the data
+export interface Task {
     name: string,
-    createdOn: string
+    createdOn?: string,
+    description?: string,
+    dueTo?: any,
+    tags?: string[]
 }
-
-
-export interface DraggableItem {
-    content: contentItem,
-    effectAllowed: EffectAllowed,
-    disable: boolean,
-    handle: boolean,
+export interface TaskDraggable {
+    content: Task
 }
 export interface Category {
     id: string,
     title: string,
-    draggableItem: DraggableItem[]
+    draggableItem: TaskDraggable[]
 }
 
 export interface DropzoneLayout {
