@@ -18,20 +18,6 @@ export class ContainerComponent implements OnInit{
       this.columnData = data
     })
   }
-
-  onDragged(item: any, list: any[], effect: DropEffect) {
-    if (effect === 'move') {
-      const index = list.indexOf(item);
-      list.splice(index, 1);
-    }
-  }
-  
-  onDrop(event: DndDropEvent, list: any[]) {
-    if (event.dropEffect === 'move') {
-      let index = event.index;
-      list.splice(index!, 0, event.data);
-    };
-  }
   handleEdit(value: any) {
     //TODO: handle emit there, modify the subject via next()
   }

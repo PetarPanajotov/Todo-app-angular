@@ -31,12 +31,12 @@ export class CreateEditModalComponent implements OnInit, OnDestroy {
 
   constructor(public modalService: ModalService, private todoService: TodoService) { }
 
-  onTagsChange(event: Event, tag: string): void {
+  onTagsChange(tag: string): void {
     this.tags.push(tag)
   };
 
   onSubmit(): void {
-    const column = this.columnData.find(column => column.id === this.columnId)
+    const column = this.columnData.find(column => column.id === this.columnId);
     const { name, description, dueTo } = this.taskCardForm.value;
     if (name && description && dueTo) {
       const contentItem: Task = {
@@ -44,13 +44,12 @@ export class CreateEditModalComponent implements OnInit, OnDestroy {
         description: description,
         dueTo: dueTo,
         tags: this.tags
-      }
+      };
       const formData: TaskDraggable = {
         content: contentItem
-      }
-      column?.draggableItem.push(formData)
+      };
+      column?.draggableItem.push(formData);
     }
-    console.log(column)
   }
   ngOnDestroy(): void {
   }
