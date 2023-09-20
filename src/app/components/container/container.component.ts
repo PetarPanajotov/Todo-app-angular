@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { DndDropEvent, DropEffect } from 'ngx-drag-drop';
 import { TodoService } from 'src/app/services/todo-service.service';
 import { Category } from 'src/app/types/task-management.models';
 

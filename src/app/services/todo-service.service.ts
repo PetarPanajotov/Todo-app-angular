@@ -12,6 +12,7 @@ export class TodoService {
     title: 'To-do',
     draggableItem: [{
       content: {
+        id: '1',
         name: 'Go to Cinema',
         createdOn: '16 September'
       }
@@ -22,6 +23,7 @@ export class TodoService {
     title: 'In Progress',
     draggableItem: [{
       content: {
+        id: '5',
         name: 'Go to sSchool',
         createdOn: '16 September'
       }
@@ -32,6 +34,7 @@ export class TodoService {
     title: 'Done',
     draggableItem: [{
       content: {
+        id: '11',
         name: 'Go to store',
         createdOn: '16 September'
       }
