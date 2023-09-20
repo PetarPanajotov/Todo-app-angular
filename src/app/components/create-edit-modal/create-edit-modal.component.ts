@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, Input } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { ModalService } from 'src/app/services/modal.service';
@@ -11,20 +11,23 @@ import { Category, TaskDraggable, Task } from 'src/app/types/task-management.mod
   styleUrls: ['./create-edit-modal.component.sass']
 })
 export class CreateEditModalComponent implements OnInit, OnDestroy {
+  @Input() dataToEdit: Task | undefined;
   isEdit: boolean = false;
-  title = this.isEdit ? 'Edit Task' : 'Create Task';
   columnId = this.modalService.columnId;
   columnData!: Category[];
-  tags: string[] = [];
-  tag: string = '';
-  subscription: Subscription | undefined
-  taskCardForm = new FormGroup({
-    name: new FormControl(''),
-    description: new FormControl(''),
-    dueTo: new FormControl(''),
-  });
+  tags?: string[] = [];
+  tag: string = ''; 
+  subscription: Subscription | undefined;
+  taskCardForm!: FormGroup;
 
   ngOnInit(): void {
+    this.isEdit = !!this.dataToEdit;
+    this.taskCardForm = new FormGroup({
+      name: this.isEdit ? new FormControl(this.dataToEdit?.name) : new FormControl(''),
+      description: this.isEdit ? new FormControl(this.dataToEdit?.description) : new FormControl(''),
+      dueTo: this.isEdit ? new FormControl(this.dataToEdit?.name) : new FormControl(''),
+    });
+    this.tags = this.isEdit? this.dataToEdit?.tags: [];
     this.todoService.columnData.subscribe((data: any) => {
       this.columnData = data
     })
@@ -33,7 +36,7 @@ export class CreateEditModalComponent implements OnInit, OnDestroy {
   constructor(public modalService: ModalService, private todoService: TodoService) { }
 
   onTagsChange(tag: string): void {
-    this.tags.push(tag)
+    this.tags!.push(tag)
   };
 
   onSubmit(): void {
@@ -50,11 +53,14 @@ export class CreateEditModalComponent implements OnInit, OnDestroy {
       const formData: TaskDraggable = {
         content: contentItem
       };
+      if(this.isEdit) {
+        
+      }
       column?.draggableItem.push(formData);
       this.modalService.modalRef?.hide();
     };
   };
-  
+
   ngOnDestroy(): void {
     if (this.subscription) {
       this.subscription.unsubscribe();

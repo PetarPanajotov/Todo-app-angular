@@ -12,5 +12,8 @@ export class CardBtnComponent {
 
   onDelete():void {
     this.operation.emit({method: 'delete', content: this.cardTaskData?.content})
-  }
+  };
+  onEdit(): void {
+    this.operation.emit({method: 'edit', content: this.cardTaskData?.content})
+  };
 }
