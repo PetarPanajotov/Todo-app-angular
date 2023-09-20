@@ -6,24 +6,30 @@
             <span aria-hidden="true" class="visually-hidden">&times;</span>
         </button>
     </div>
-    <div class="modal-body">
-        <form [formGroup]="taskCardForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="taskCardForm" (ngSubmit)="onSubmit()">
+        <div class="modal-body">
             <div class="form-group">
-                <label for="title">Title</label>
-                <input type="text" class="form-control" placeholder="Enter Title" id="title" formControlName="name">
-                <label for="description">Description</label>
-                <input type="text" class="form-control" placeholder="Enter Description" id="description" formControlName="description">
-                <div class="inputs-wrapper-flex">
+                <div>
+                    <label for="title">Title</label>
+                    <input type="text" class="form-control mt-1" placeholder="Enter Title" id="title"
+                        formControlName="name">
+                </div>
+                <div class="pt-3">
+                    <label for="description">Description</label>
+                    <input type="text" class="form-control mt-1" placeholder="Enter Description" id="description"
+                        formControlName="description">
+                </div>
+                <div class="inputs-wrapper-flex pt-3">
                     <div>
                         <label for="dueTo">Due to</label>
-                        <input type="text" class="form-control" placeholder="MM/DD/YYYY" bsDatepicker [bsConfig]="{ isAnimated: true,
-                        showWeekNumbers: false }" id="dueTo" formControlName="dueTo">
+                        <input type="text" class="form-control mt-1" placeholder="MM/DD/YYYY" bsDatepicker [bsConfig]="{ isAnimated: true,
+                        showWeekNumbers: false }" id="dueTo" formControlName="dueTo" autocomplete=off>
                     </div>
                     <div>
                         <label for="tag">Add tag</label>
                         <div class="input-with-suffix">
-                            <input type="text" class="form-control" placeholder="Enter Tag" id="tag" [(ngModel)]="tag"
-                                [ngModelOptions]="{standalone: true}">
+                            <input type="text" class="form-control mt-1" placeholder="Enter Tag" id="tag"
+                                [(ngModel)]="tag" [ngModelOptions]="{standalone: true}">
                             <button class="btn btn-primary" type="button" (click)="onTagsChange(tag)">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                                     <path
@@ -37,7 +43,10 @@
             <div class="card-tag-wrapper">
                 <h6 *ngFor="let tag of tags" class="card-tag">{{tag}}</h6>
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-    </div>
+
+        </div>
+        <div class="d-flex justify-content-center mt-3 modal-footer">
+            <button type="submit" class="btn btn-primary w-50">Submit</button>
+        </div>
+    </form>
 </div>

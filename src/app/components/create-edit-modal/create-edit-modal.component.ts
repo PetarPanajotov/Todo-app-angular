@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import { ModalService } from 'src/app/services/modal.service';
 import { TodoService } from 'src/app/services/todo-service.service';
 import { Category, TaskDraggable, Task } from 'src/app/types/task-management.models';
@@ -16,7 +17,7 @@ export class CreateEditModalComponent implements OnInit, OnDestroy {
   columnData!: Category[];
   tags: string[] = [];
   tag: string = '';
-
+  subscription: Subscription | undefined
   taskCardForm = new FormGroup({
     name: new FormControl(''),
     description: new FormControl(''),
@@ -41,6 +42,7 @@ export class CreateEditModalComponent implements OnInit, OnDestroy {
     if (name && description && dueTo) {
       const contentItem: Task = {
         name: name,
+        createdOn: new Date().toString(),
         description: description,
         dueTo: dueTo,
         tags: this.tags
@@ -49,8 +51,13 @@ export class CreateEditModalComponent implements OnInit, OnDestroy {
         content: contentItem
       };
       column?.draggableItem.push(formData);
-    }
-  }
+      this.modalService.modalRef?.hide();
+    };
+  };
+  
   ngOnDestroy(): void {
-  }
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    };
+  };
 };
