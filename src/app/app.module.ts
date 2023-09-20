@@ -16,6 +16,7 @@ import { CardBtnComponent } from './components/card-btn/card-btn.component';
 import { AddNewTaskComponent } from './components/add-new-task/add-new-task.component';
 import { CreateEditModalComponent } from './components/create-edit-modal/create-edit-modal.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { TimestampPipe } from './pipes/timestamp.pipe';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
     TaskCardComponent,
     CardBtnComponent,
     AddNewTaskComponent,
-    CreateEditModalComponent
+    CreateEditModalComponent,
+    TimestampPipe
   ],
   imports: [
     BrowserModule,
