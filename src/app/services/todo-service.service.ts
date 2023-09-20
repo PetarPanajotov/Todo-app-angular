@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Category } from '../types/columnList';
+import { Category } from '../types/task-management.models';
 import { DndDropEvent, DropEffect } from 'ngx-drag-drop';
 import { BehaviorSubject } from 'rxjs';
 
@@ -14,10 +14,7 @@ export class TodoService {
       content: {
         name: 'Go to Cinema',
         createdOn: '16 September'
-      },
-      effectAllowed: 'move',
-      disable: false,
-      handle: false
+      }
     }]
   },
   {
@@ -27,10 +24,7 @@ export class TodoService {
       content: {
         name: 'Go to sSchool',
         createdOn: '16 September'
-      },
-      effectAllowed: 'move',
-      disable: false,
-      handle: false
+      }
     }]
   },
   {
@@ -40,12 +34,10 @@ export class TodoService {
       content: {
         name: 'Go to store',
         createdOn: '16 September'
-      },
-      effectAllowed: 'move',
-      disable: false,
-      handle: false
+      }
     }]
   }])
+
   setColumnData(newList:any) {
     const oldData = this.columnData.value
     this.columnData.next([...oldData, newList])
