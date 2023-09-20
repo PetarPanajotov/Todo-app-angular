@@ -1,6 +1,6 @@
 <div class="column-content" dndDropzone (dndDrop)="onDrop($event, data!.draggableItem)">
     <div class="card" *ngFor="let item of data?.draggableItem" [dndDraggable]="item"
-        [dndEffectAllowed]="item.effectAllowed" (dndCanceled)="onDragged(item, data!.draggableItem, 'none')"
+        [dndEffectAllowed]="'move'" (dndCanceled)="onDragged(item, data!.draggableItem, 'none')"
         (dndMoved)="onDragged(item, data!.draggableItem, 'move')">
         <div class="card-tag-wrapper">
             <h6 class="card-tag">Angular</h6>
