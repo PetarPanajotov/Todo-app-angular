@@ -6,9 +6,8 @@ import * as moment from 'moment';
 })
 export class TimestampPipe implements PipeTransform {
 
-  transform(dateString: any): unknown {
+  transform(dateString: any, format: string = 'DD MMM'): unknown {
     const momentDate = moment(dateString);
-    return momentDate.format('DD MMM');
-  }
-
-}
+    return momentDate.format(format);
+  };
+};
