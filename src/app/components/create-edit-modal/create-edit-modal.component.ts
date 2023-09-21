@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit, Input } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { TimestampPipe } from 'src/app/pipes/timestamp.pipe';
 import { ModalService } from 'src/app/services/modal.service';
 import { TodoService } from 'src/app/services/todo-service.service';
 import { Category, TaskDraggable, Task } from 'src/app/types/task-management.models';
@@ -26,7 +27,7 @@ export class CreateEditModalComponent implements OnInit, OnDestroy {
     this.taskCardForm = new FormGroup({
       name: this.isEdit ? new FormControl(this.dataToEdit?.name) : new FormControl(''),
       description: this.isEdit ? new FormControl(this.dataToEdit?.description) : new FormControl(''),
-      dueTo: this.isEdit ? new FormControl(this.dataToEdit?.name) : new FormControl(''),
+      dueTo: this.isEdit ? new FormControl(this.dataToEdit?.dueTo) : new FormControl(''),
     });
     if (this.isEdit) {
       this.tags = this.dataToEdit?.tags!
@@ -36,7 +37,10 @@ export class CreateEditModalComponent implements OnInit, OnDestroy {
     })
   }
 
-  constructor(public modalService: ModalService, private todoService: TodoService) { }
+  constructor(
+    public modalService: ModalService,
+    private todoService: TodoService,
+    ) { }
 
   onTagsChange(tag: string): void {
     this.tags!.push(tag)
