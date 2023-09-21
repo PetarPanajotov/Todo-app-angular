@@ -7,18 +7,13 @@
         </button>
     </div>
     <div class="modal-body">
-        <h4>Go to cinema</h4>
-        <p class="pt-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore, veniam, cupiditate quia, dolore nostrum
-            sapiente et animi architecto cum repellat incidunt temporibus earum optio eius! Quisquam in fugiat sunt?
-            Quidem.</p>
-        <p class="pt-3">Created on: 16 September</p>
-        <p>Due to: 21 September</p>
+        <h4>{{taskCardDetails?.name}}</h4>
+        <p class="pt-3">{{taskCardDetails?.description}}</p>
+        <p class="pt-3">Created on: {{taskCardDetails?.createdOn | timestamp:'MM/DD/YYYY'}}</p>
+        <p>Due to: {{taskCardDetails?.dueTo | timestamp:'MM/DD/YYYY'}}</p>
         <div class="card-tags-wrapper pt-3">
             <p>Tags:</p>
-            <h6 class="card-tag">Red</h6>
-            <h6 class="card-tag">Red</h6>
-            <h6 class="card-tag">Red</h6>
-            <h6 class="card-tag">Red</h6>
+            <h6 *ngFor="let tag of taskCardDetails?.tags" class="card-tag">{{tag}}</h6>
         </div>
         <p class="pt-3">Status: <span class="status">Unfinished</span></p>
     </div>
