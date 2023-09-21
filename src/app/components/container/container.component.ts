@@ -7,10 +7,10 @@ import { Category } from 'src/app/types/task-management.models';
   templateUrl: './container.component.html',
   styleUrls: ['./container.component.sass'],
 })
-export class ContainerComponent implements OnInit{
+export class ContainerComponent implements OnInit {
   columnData: Category[] = [];
-  
-  constructor(private toDoService: TodoService) {}
+
+  constructor(private toDoService: TodoService) { }
 
   ngOnInit(): void {
     this.toDoService.columnData.subscribe((data: any) => {
@@ -18,6 +18,10 @@ export class ContainerComponent implements OnInit{
     })
   }
   handleEdit(value: any) {
-    //TODO: handle emit there, modify the subject via next()
-  }
-}
+    const find = this.columnData.find(item => item.id === value.id)
+    if (find) {
+      find.title = value.title
+      console.log(this.columnData)
+    };
+  };
+};

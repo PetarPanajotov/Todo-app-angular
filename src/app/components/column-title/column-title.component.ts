@@ -7,6 +7,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class ColumnTitleComponent {
   @Input() title: string | undefined;
+  @Input() id: string | undefined;
   @Output() editedTitle = new EventEmitter<any>();
   titleEdit: boolean = false;
 
@@ -16,7 +17,7 @@ export class ColumnTitleComponent {
 
   onBlur(): void {
     this.titleEdit = false;
-    this.editedTitle.emit(this.title)
+    this.editedTitle.emit({title: this.title, id: this.id})
   };
 
 }
