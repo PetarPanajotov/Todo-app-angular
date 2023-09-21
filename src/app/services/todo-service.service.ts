@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Category } from '../types/task-management.models';
-import { DndDropEvent, DropEffect } from 'ngx-drag-drop';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
@@ -10,12 +9,8 @@ export class TodoService {
   columnData = new BehaviorSubject<Category[]>([])
 
   constructor() {
-    debugger; 
-    // Check if data exists in localStorage
     const localStorageData = localStorage.getItem('toDoList');
-
     if (localStorageData) {
-      // Parse the data from localStorage and set it as the initial value
       this.columnData.next(JSON.parse(localStorageData));
     } else {
       this.columnData.next(
