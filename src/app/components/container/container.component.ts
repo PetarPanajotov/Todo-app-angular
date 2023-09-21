@@ -19,9 +19,14 @@ export class ContainerComponent implements OnInit {
   }
   handleEdit(value: any) {
     const find = this.columnData.find(item => item.id === value.id)
-    if (find) {
-      find.title = value.title
-      console.log(this.columnData)
+    if (value.method === "Edit") {
+      if (find) {
+        find.title = value.title
+        console.log(this.columnData)
+      };
+    } else if (value.method === "Delete") {
+      const filteredData = this.columnData.filter(item => item.id !== value.id)
+      this.toDoService.deleteColumnData(filteredData)
     };
   };
 };

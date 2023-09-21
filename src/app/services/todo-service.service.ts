@@ -45,6 +45,9 @@ export class TodoService {
     const oldData = this.columnData.value
     this.columnData.next([...oldData, newList])
   }
+  deleteColumnData(remainingColumns: any) {
+    this.columnData.next(remainingColumns);
+  }
   onDragged(item: any, list: any[], effect: DropEffect) {
     if (effect === 'move') {
       const index = list.indexOf(item);

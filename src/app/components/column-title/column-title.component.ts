@@ -15,9 +15,11 @@ export class ColumnTitleComponent {
     this.titleEdit = true;
   };
 
-  onBlur(): void {
+  onTitleEdit(): void {
     this.titleEdit = false;
-    this.editedTitle.emit({title: this.title, id: this.id})
+    this.editedTitle.emit({method: 'Edit', title: this.title, id: this.id})
   };
-
-}
+  onTitleDelete(): void {
+    this.editedTitle.emit({method: 'Delete', title: this.title, id: this.id})
+  };
+};

@@ -3,18 +3,21 @@
         {{title}}
     </h5>
     <div *ngIf="titleEdit">
-        <input
-            autofocus
-            (blur)="onBlur()"
-            class="title-edit"
-            autoSizeInput
-            [includeBorders]=true
-            [value]="title"
-            [(ngModel)]="title"
-            name="title"
-        >
+        <input autofocus (blur)="onTitleEdit()" (keyup.enter)="onTitleEdit()" class="title-edit" autoSizeInput
+            [includeBorders]=true [value]="title" [(ngModel)]="title" name="title">
     </div>
     <div class="counter">
         <p>36</p>
+    </div>
+    <div class="btn-group more-btn-wrapper" dropdown>
+        <div dropdownToggle class="more-btn" aria-controls="dropdown-basic">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 512" height="1em">
+                <path
+                    d="M64 360a56 56 0 1 0 0 112 56 56 0 1 0 0-112zm0-160a56 56 0 1 0 0 112 56 56 0 1 0 0-112zM120 96A56 56 0 1 0 8 96a56 56 0 1 0 112 0z" />
+            </svg>
+        </div>
+        <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
+            <li role="menuitem" class="dropdown-item" (click)="onTitleDelete()">Delete</li>
+        </ul>
     </div>
 </div>
