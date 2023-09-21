@@ -27,7 +27,7 @@ export class CreateEditModalComponent implements OnInit, OnDestroy {
     this.taskCardForm = new FormGroup({
       name: this.isEdit ? new FormControl(this.dataToEdit?.name) : new FormControl(''),
       description: this.isEdit ? new FormControl(this.dataToEdit?.description) : new FormControl(''),
-      dueTo: this.isEdit ? new FormControl(this.dataToEdit?.dueTo) : new FormControl(''),
+      dueTo: this.isEdit ? new FormControl(new Date(this.dataToEdit?.dueTo)) : new FormControl(''),
     });
     if (this.isEdit) {
       this.tags = this.dataToEdit?.tags!
@@ -55,13 +55,14 @@ export class CreateEditModalComponent implements OnInit, OnDestroy {
         name: name,
         createdOn: new Date().toString(),
         description: description,
-        dueTo: dueTo,
+        dueTo: new Date(dueTo),
         tags: this.tags
       };
       const formData: TaskDraggable = {
         content: contentItem
       };
       column?.draggableItem.push(formData);
+      this.todoService.editedColumnData(this.columnData)
       this.modalService.modalRef?.hide();
     };
   };
@@ -86,11 +87,12 @@ export class CreateEditModalComponent implements OnInit, OnDestroy {
         foundItem.draggableItem[itemIndex].content = contentItem;
       };
     }
+    this.todoService.editedColumnData(this.columnData)
     this.modalService.modalRef?.hide();
   }
 
   ngOnDestroy(): void {
-    if (this.subscription) {
+    if (this.subscription) { 
       this.subscription.unsubscribe();
     };
   };

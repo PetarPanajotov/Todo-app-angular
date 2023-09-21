@@ -7,61 +7,52 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class TodoService {
-  columnData = new BehaviorSubject<Category[]>([{
-    id: '1',
-    title: 'To-do',
-    draggableItem: [{
-      content: {
-        id: '1',
-        name: 'Go to Cinema',
-        createdOn: '16 September'
-      }
-    }]
-  },
-  {
-    id: '2',
-    title: 'In Progress',
-    draggableItem: [{
-      content: {
-        id: '5',
-        name: 'Go to sSchool',
-        createdOn: '16 September'
-      }
-    }]
-  },
-  {
-    id: '3',
-    title: 'Done',
-    draggableItem: [{
-      content: {
-        id: '11',
-        name: 'Go to store',
-        createdOn: '16 September'
-      }
-    }]
-  }])
+  columnData = new BehaviorSubject<Category[]>([])
 
+  constructor() {
+    debugger; 
+    // Check if data exists in localStorage
+    const localStorageData = localStorage.getItem('toDoList');
+
+    if (localStorageData) {
+      // Parse the data from localStorage and set it as the initial value
+      this.columnData.next(JSON.parse(localStorageData));
+    } else {
+      this.columnData.next(
+        [{
+          id: '1',
+          title: 'To-do',
+          draggableItem: []
+        },
+        {
+          id: '2',
+          title: 'In Progress',
+          draggableItem: []
+        },
+        {
+          id: '3',
+          title: 'Done',
+          draggableItem: []
+        }]
+      )
+    }
+    localStorage.setItem('toDoList', JSON.stringify(this.columnData.value))
+  }
+
+  
   setColumnData(newList:any) {
     const oldData = this.columnData.value
-    this.columnData.next([...oldData, newList])
+    const updatedData = ([...oldData, newList])
+    this.columnData.next(updatedData)
+    localStorage.setItem('toDoList', JSON.stringify(updatedData))
   }
   deleteColumnData(remainingColumns: any) {
     this.columnData.next(remainingColumns);
+    localStorage.setItem('toDoList', JSON.stringify(remainingColumns))
   }
-  onDragged(item: any, list: any[], effect: DropEffect) {
-    if (effect === 'move') {
-      const index = list.indexOf(item);
-      list.splice(index, 1);
-    }
+  editedColumnData(editedListData: any) {
+    debugger;
+    this.columnData.next(editedListData)
+    localStorage.setItem('toDoList', JSON.stringify(editedListData))
   }
-  
-  onDrop(event: DndDropEvent, list: any[]) {
-    if (event.dropEffect === 'move') {
-      let index = event.index;
-      list.splice(index!, 0, event.data);
-    };
-  }
-  handleEdit(value: any) {
-    //TODO: handle emit there, modify the subject via next()
-  }
-}
+};

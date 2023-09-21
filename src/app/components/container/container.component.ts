@@ -14,19 +14,23 @@ export class ContainerComponent implements OnInit {
 
   ngOnInit(): void {
     this.toDoService.columnData.subscribe((data: any) => {
-      this.columnData = data
+      this.columnData = data;
     })
   }
   handleEdit(value: any) {
-    const find = this.columnData.find(item => item.id === value.id)
     if (value.method === "Edit") {
+      const find = this.columnData.find(item => item.id === value.id)
       if (find) {
-        find.title = value.title
-        console.log(this.columnData)
+        find.title = value.title;
+        this.toDoService.editedColumnData(this.columnData)
       };
     } else if (value.method === "Delete") {
       const filteredData = this.columnData.filter(item => item.id !== value.id)
       this.toDoService.deleteColumnData(filteredData)
-    };
+    } else if (value.method === "Drag") {
+      this.toDoService.editedColumnData(this.columnData)
+    } else if (value.method === "DeleteCard") {
+      this.toDoService.deleteColumnData(this.columnData)
+    }
   };
 };

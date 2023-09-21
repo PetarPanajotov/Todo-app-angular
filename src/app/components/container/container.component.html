@@ -2,7 +2,7 @@
     <div class="wrapper">
         <div class="column-wrapper" *ngFor="let data of columnData">
             <app-column-title [title]="data.title" [id]="data.id" (editedTitle)="handleEdit($event)" />
-            <app-task-card [data]="data" />
+            <app-task-card [data]="data" [columnData]="columnData" (modifyData)="handleEdit($event)" />
             <app-add-new-task [columnId]="data.id"/>
         </div>
     </div>
