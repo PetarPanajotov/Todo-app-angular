@@ -1,4 +1,4 @@
-<main class="container-fluid">
+<main class="container-lg">
     <div class="wrapper">
         <div class="column-wrapper" *ngFor="let data of columnData">
             <app-column-title [title]="data.title" [id]="data.id" (editedTitle)="handleEdit($event)" />
