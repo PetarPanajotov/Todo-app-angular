@@ -1,11 +1,12 @@
 .container-lg
     max-width: 1750px
 .wrapper
+    width: auto
     display: flex
     justify-content: center
     flex-wrap: nowrap
-    padding-top: 2em
-    min-height: 80vh
+    margin-top: 2em
+    min-height: 75vh
     gap: 2em
     .column-wrapper
         flex: 0 1 18%
@@ -22,3 +23,11 @@
         box-shadow: 0 0 2em rgba(0, 0, 0, 0.2)
         align-items: stretch
         justify-content: stretch
+.dndPlaceholder
+    flex: 0 1 18%
+    min-height: 10em
+    padding: 3em
+    background-color: #fff
+    border: 1px dashed black
+.dndDraggingSource
+    display: none

@@ -9,8 +9,9 @@ import { Category } from 'src/app/types/task-management.models';
 })
 export class ContainerComponent implements OnInit {
   columnData: Category[] = [];
+  columnIsDragged = false;
 
-  constructor(private toDoService: TodoService) { }
+  constructor(public toDoService: TodoService) { }
 
   ngOnInit(): void {
     this.toDoService.columnData.subscribe((data: any) => {
@@ -27,8 +28,6 @@ export class ContainerComponent implements OnInit {
     } else if (value.method === "Delete") {
       const filteredData = this.columnData.filter(item => item.id !== value.id)
       this.toDoService.deleteColumnData(filteredData)
-    } else if (value.method === "Drag") {
-      this.toDoService.editedColumnData(this.columnData)
     } else if (value.method === "DeleteCard") {
       this.toDoService.deleteColumnData(this.columnData)
     }

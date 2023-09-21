@@ -1,12 +1,10 @@
-import type { EffectAllowed } from "ngx-drag-drop"
-//fix this interface once you fix the data
 export interface Task {
-    id?: string,
+    id: string,
     name: string,
-    createdOn?: string,
-    description?: string,
-    dueTo?: any,
-    tags?: string[]
+    createdOn: string,
+    description: string,
+    dueTo: any,
+    tags: string[]
 }
 export interface TaskDraggable {
     content: Task

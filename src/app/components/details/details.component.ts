@@ -7,11 +7,7 @@ import { Task } from 'src/app/types/task-management.models';
   templateUrl: './details.component.html',
   styleUrls: ['./details.component.sass']
 })
-export class DetailsComponent implements OnInit{
+export class DetailsComponent {
   @Input() taskCardDetails: Task | undefined;
   constructor(public modalService: ModalService) {}
-  
-  ngOnInit(): void {
-    console.log(this.taskCardDetails)
-  }
 }

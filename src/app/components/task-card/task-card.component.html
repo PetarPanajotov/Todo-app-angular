@@ -1,7 +1,8 @@
-<div class="column-content" dndDropzone (dndDrop)="onDrop($event, data!.draggableItem)">
+<div class="column-content" [dndDisableIf]="toDoService.activeDropZone === 'Column'" dndDropzone (dndDrop)="toDoService.onDrop($event, data!.draggableItem)">
     <div class="card" *ngFor="let item of data?.draggableItem" [dndDraggable]="item"
-        [dndEffectAllowed]="'move'" (dndCanceled)="onDragged(item, data!.draggableItem, 'none')"  (dndEnd)="onDragEnd($event)"
-        (dndMoved)="onDragged(item, data!.draggableItem, 'move')">
+        [dndEffectAllowed]="'move'" (dndCanceled)="toDoService.onDragged(item, data!.draggableItem, 'none')"  (dndEnd)="toDoService.onDragEnd($event)"
+        (dndStart)="toDoService.onDragStart($event, 'Task')"
+        (dndMoved)="toDoService.onDragged(item, data!.draggableItem, 'move')">
         <div class="card-tag-wrapper">
             <h6 class="card-tag" *ngFor="let tag of item.content.tags">{{tag}}</h6>
         </div>
@@ -17,6 +18,3 @@
     <div class="card placeholder dndPlaceholder" dndPlaceholderRef>
     </div>
 </div>
-<ng-template #template>
-    <app-create-edit-modal [dataToEdit]="dataToEdit"/>
-</ng-template>

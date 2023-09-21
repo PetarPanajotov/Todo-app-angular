@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit, Input } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { TimestampPipe } from 'src/app/pipes/timestamp.pipe';
 import { ModalService } from 'src/app/services/modal.service';
 import { TodoService } from 'src/app/services/todo-service.service';
 import { Category, TaskDraggable, Task } from 'src/app/types/task-management.models';
@@ -41,7 +40,7 @@ export class CreateEditModalComponent implements OnInit, OnDestroy {
   constructor(
     public modalService: ModalService,
     private todoService: TodoService,
-    ) { }
+  ) { }
 
   onTagsChange(tag: string, tagInput: HTMLInputElement): void {
     this.tags!.push(tag)
@@ -52,18 +51,17 @@ export class CreateEditModalComponent implements OnInit, OnDestroy {
     const column = this.columnData.find(column => column.id === this.columnId);
     const { name, description, dueTo } = this.taskCardForm.value;
     if (name && description && dueTo) {
-      const contentItem: Task = {
-        id: uuidv4(),
-        name: name,
-        createdOn: new Date().toString(),
-        description: description,
-        dueTo: new Date(dueTo),
-        tags: this.tags
+      const contentItem: TaskDraggable = {
+        content: {
+          id: uuidv4(),
+          name: name,
+          createdOn: new Date().toString(),
+          description: description,
+          dueTo: new Date(dueTo),
+          tags: this.tags
+        }
       };
-      const formData: TaskDraggable = {
-        content: contentItem
-      };
-      column?.draggableItem.push(formData);
+      column?.draggableItem.push(contentItem);
       this.todoService.editedColumnData(this.columnData)
       this.modalService.modalRef?.hide();
     };
@@ -79,7 +77,7 @@ export class CreateEditModalComponent implements OnInit, OnDestroy {
       if (itemIndex !== -1) {
         const { name, description, dueTo } = this.taskCardForm.value;
         const contentItem: Task = {
-          id: this.dataToEdit?.id,
+          id: this.dataToEdit!.id,
           name: name,
           createdOn: new Date().toString(),
           description: description,
@@ -92,12 +90,13 @@ export class CreateEditModalComponent implements OnInit, OnDestroy {
     this.todoService.editedColumnData(this.columnData)
     this.modalService.modalRef?.hide();
   }
-  removeTag(tag: any):void {
+  removeTag(tag: any): void {
     const index = this.tags.findIndex(item => item === tag)
     this.tags.splice(index, 1)
   }
+
   ngOnDestroy(): void {
-    if (this.subscription) { 
+    if (this.subscription) {
       this.subscription.unsubscribe();
     };
   };
