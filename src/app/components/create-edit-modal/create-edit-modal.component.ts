@@ -31,6 +31,7 @@ export class CreateEditModalComponent implements OnInit, OnDestroy {
     });
     if (this.isEdit) {
       this.tags = this.dataToEdit?.tags!
+      console.log(this.tags)
     }
     this.todoService.columnData.subscribe((data: any) => {
       this.columnData = data
@@ -42,8 +43,9 @@ export class CreateEditModalComponent implements OnInit, OnDestroy {
     private todoService: TodoService,
     ) { }
 
-  onTagsChange(tag: string): void {
+  onTagsChange(tag: string, tagInput: HTMLInputElement): void {
     this.tags!.push(tag)
+    tagInput.value = ''
   };
 
   onSubmit(): void {
@@ -90,7 +92,10 @@ export class CreateEditModalComponent implements OnInit, OnDestroy {
     this.todoService.editedColumnData(this.columnData)
     this.modalService.modalRef?.hide();
   }
-
+  removeTag(tag: any):void {
+    const index = this.tags.findIndex(item => item === tag)
+    this.tags.splice(index, 1)
+  }
   ngOnDestroy(): void {
     if (this.subscription) { 
       this.subscription.unsubscribe();

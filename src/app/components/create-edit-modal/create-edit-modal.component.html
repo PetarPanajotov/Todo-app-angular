@@ -29,8 +29,8 @@
                         <label for="tag">Add tag</label>
                         <div class="input-with-suffix">
                             <input type="text" class="form-control mt-1" placeholder="Enter Tag" id="tag"
-                                [(ngModel)]="tag" [ngModelOptions]="{standalone: true}">
-                            <button class="btn btn-primary" type="button" (click)="onTagsChange(tag)">
+                                [(ngModel)]="tag" [ngModelOptions]="{standalone: true}" #tagInput>
+                            <button class="btn btn-primary" type="button" (click)="onTagsChange(tag, tagInput)">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                                     <path
                                         d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z" />
@@ -41,7 +41,7 @@
                 </div>
             </div>
             <div class="card-tag-wrapper">
-                <h6 *ngFor="let tag of tags" class="card-tag">{{tag}}</h6>
+                <h6 *ngFor="let tag of tags" class="card-tag" (click)="removeTag(tag)">{{tag}}</h6>
             </div>
         </div>
         <div class="d-flex justify-content-center mt-3 modal-footer">

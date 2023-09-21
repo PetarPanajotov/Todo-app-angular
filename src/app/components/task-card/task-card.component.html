@@ -11,7 +11,7 @@
                 <app-card-btn [cardTaskData]="item" (operation)="handleOperation($event)" />
             </div>
             <p>{{item.content.description}}</p>
-            <p>{{item.content.createdOn | timestamp}}</p>
+            <h6 class="card-dates">{{item.content.createdOn | timestamp}} > {{item.content.dueTo | timestamp}}</h6>
         </div>
     </div>
     <div class="card placeholder dndPlaceholder" dndPlaceholderRef>
